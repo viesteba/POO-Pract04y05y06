@@ -26,5 +26,10 @@ namespace EditorDeTexto
         {
             MessageBox.Show("Se ha cerrado " + this.Text);
         }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
