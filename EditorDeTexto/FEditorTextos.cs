@@ -25,6 +25,7 @@ namespace EditorDeTexto
             FEditorHijo f2 = new FEditorHijo(numHijos);
             f2.MdiParent = this;
             f2.Show();
+            this.ventanaToolStripMenuItem.Enabled = true;
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -50,6 +51,22 @@ namespace EditorDeTexto
         private void verticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.LayoutMdi(System.Windows.Forms.MdiLayout.TileVertical);
+        }
+
+        private void ventanaToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
+        {
+            bool existeAlguno = false;
+            foreach(FEditorHijo fEditorHijo in this.MdiChildren)
+            {
+                if(fEditorHijo.IsHandleCreated)
+                { 
+                    existeAlguno = true;
+                } 
+            }
+            if (!existeAlguno)
+            {
+                this.ventanaToolStripMenuItem.Enabled = false;
+            }
         }
     }
 }
