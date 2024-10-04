@@ -16,20 +16,21 @@ namespace EditorDeTexto
         public Form1()
         {
             InitializeComponent();
-            numHijos = 1;
+            numHijos = 0;
         }
 
         private void nuevoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            numHijos++;
             FEditorHijo f2 = new FEditorHijo(numHijos);
             f2.MdiParent = this;
             f2.Show();
-            numHijos++;
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
+        
     }
 }
