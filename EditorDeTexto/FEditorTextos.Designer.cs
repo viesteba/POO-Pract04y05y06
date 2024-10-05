@@ -97,7 +97,6 @@
             this.ventanaToolStripMenuItem.Name = "ventanaToolStripMenuItem";
             this.ventanaToolStripMenuItem.Size = new System.Drawing.Size(91, 29);
             this.ventanaToolStripMenuItem.Text = "Ventana";
-            this.ventanaToolStripMenuItem.DropDownOpening += new System.EventHandler(this.ventanaToolStripMenuItem_DropDownOpening);
             // 
             // arrangeIconsToolStripMenuItem
             // 

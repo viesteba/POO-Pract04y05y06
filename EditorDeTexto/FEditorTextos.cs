@@ -13,12 +13,21 @@ namespace EditorDeTexto
     public partial class Form1 : Form
     {
         private int numHijos;
+        /// <summary>
+        /// Se inicializan las componentes del formulario.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
             numHijos = 0;
         }
-
+        /// <summary>
+        /// Se crea un formulario un hijo.
+        /// Aparece en la ventana cuando está abierto y marcado cuando está activado.
+        /// Si no quedan formularios no aparecen las opciones de ventana.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void nuevoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             // Creamos y mostramos el nuevo formulario hijo
@@ -27,7 +36,7 @@ namespace EditorDeTexto
             f2.MdiParent = this;
             f2.Show();
 
-            //Activamos la ventana y añadimos un tsmi del formulario hiijo
+            //Activamos la ventana y añadimos un tsmi del formulario hijo
             this.ventanaToolStripMenuItem.Enabled = true;
             ToolStripMenuItem fHijoIconsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ventanaToolStripMenuItem.DropDownItems.Insert(4+numHijos,fHijoIconsToolStripMenuItem);
@@ -45,9 +54,14 @@ namespace EditorDeTexto
             //Si activamos el formulario hijo lo marcamos en la ventana.
             f2.Activated += (s, ev) => fHijoIconsToolStripMenuItem.Checked = true;
         }
+        /// <summary>
+        /// Si se cierra el formulario y no queda ningún otro formulario hijo, ventana no muestra sus opciones.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChildForm_FormClosed(object sender, EventArgs e)
         {
-            if (this.MdiChildren.Length > 0)
+            if (this.MdiChildren.Length > 1)
             {
                 this.ventanaToolStripMenuItem.Enabled = true;
             }
@@ -56,40 +70,50 @@ namespace EditorDeTexto
                 this.ventanaToolStripMenuItem.Enabled = false;
             }
         }
+        /// <summary>
+        /// Cierra el formulario cuando se pulsa el botón Salir en Archivo.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
+        /// <summary>
+        /// Al seleccionar 'ArrangeIcons' en ventana ofrece una presentación reorganizando los iconos.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void arrangeIconsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.LayoutMdi(System.Windows.Forms.MdiLayout.ArrangeIcons);
         }
-
+        /// <summary>
+        /// Al seleccionar 'Cascada' en ventana ofrece una presentación en estilo cascada.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cascadaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.LayoutMdi(System.Windows.Forms.MdiLayout.Cascade);
         }
-
+        /// <summary>
+        /// Al seleccionar 'Horizontal' en ventana ofrece una disposición horizontal de los formularios.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void horizontalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.LayoutMdi(System.Windows.Forms.MdiLayout.TileHorizontal);
         }
-
+        /// <summary>
+        /// Al seleccionar 'Vertical' en ventana muestra una disposición vertical de los formularios hijos.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void verticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.LayoutMdi(System.Windows.Forms.MdiLayout.TileVertical);
-        }
-        private void ventanaToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
-        {
-            if(this.MdiChildren.Length > 0)
-            {
-                this.ventanaToolStripMenuItem.Enabled = true;
-            }
-            else
-            {
-                this.ventanaToolStripMenuItem.Enabled = false;
-            }
         }
     }
 }
