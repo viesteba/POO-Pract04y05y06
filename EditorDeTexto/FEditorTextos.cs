@@ -35,15 +35,26 @@ namespace EditorDeTexto
             fHijoIconsToolStripMenuItem.Checked = true;
             fHijoIconsToolStripMenuItem.Click += (s, ev) => f2.Activate();
 
-            //Si cerramos el formulario hijo lo eliminamos de la ventana.
+            //Si cerramos el formulario hijo lo eliminamos de la ventana. Verficamos si quedan hijos.
             f2.FormClosed += (s, ev) => this.ventanaToolStripMenuItem.DropDownItems.Remove(fHijoIconsToolStripMenuItem);
-            
+            f2.FormClosed += ChildForm_FormClosed;
+
             //Si desactivamos el formulario hijo lo desmarcamos en la ventana.
             f2.Deactivate += (s, ev) => fHijoIconsToolStripMenuItem.Checked = false;
 
             //Si activamos el formulario hijo lo marcamos en la ventana.
             f2.Activated += (s, ev) => fHijoIconsToolStripMenuItem.Checked = true;
-            
+        }
+        private void ChildForm_FormClosed(object sender, EventArgs e)
+        {
+            if (this.MdiChildren.Length > 0)
+            {
+                this.ventanaToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                this.ventanaToolStripMenuItem.Enabled = false;
+            }
         }
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -71,15 +82,11 @@ namespace EditorDeTexto
         }
         private void ventanaToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
-            bool existeAlguno = false;
-            foreach (FEditorHijo fEditorHijo in this.MdiChildren)
+            if(this.MdiChildren.Length > 0)
             {
-                if (fEditorHijo.IsHandleCreated)
-                {
-                    existeAlguno = true;
-                }
+                this.ventanaToolStripMenuItem.Enabled = true;
             }
-            if (!existeAlguno)
+            else
             {
                 this.ventanaToolStripMenuItem.Enabled = false;
             }
