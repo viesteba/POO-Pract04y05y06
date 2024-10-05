@@ -21,13 +21,30 @@ namespace EditorDeTexto
 
         private void nuevoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            // Creamos y mostramos el nuevo formulario hijo
             numHijos++;
             FEditorHijo f2 = new FEditorHijo(numHijos);
             f2.MdiParent = this;
             f2.Show();
-            this.ventanaToolStripMenuItem.Enabled = true;
-        }
 
+            //Activamos la ventana y añadimos un tsmi del formulario hiijo
+            this.ventanaToolStripMenuItem.Enabled = true;
+            ToolStripMenuItem fHijoIconsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ventanaToolStripMenuItem.DropDownItems.Insert(4+numHijos,fHijoIconsToolStripMenuItem);
+            fHijoIconsToolStripMenuItem.Text = numHijos + " Documento " + numHijos;
+            fHijoIconsToolStripMenuItem.Checked = true;
+            fHijoIconsToolStripMenuItem.Click += (s, ev) => f2.Activate();
+
+            //Si cerramos el formulario hijo lo eliminamos de la ventana.
+            f2.FormClosed += (s, ev) => this.ventanaToolStripMenuItem.DropDownItems.Remove(fHijoIconsToolStripMenuItem);
+            
+            //Si desactivamos el formulario hijo lo desmarcamos en la ventana.
+            f2.Deactivate += (s, ev) => fHijoIconsToolStripMenuItem.Checked = false;
+
+            //Si activamos el formulario hijo lo marcamos en la ventana.
+            f2.Activated += (s, ev) => fHijoIconsToolStripMenuItem.Checked = true;
+            
+        }
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -52,16 +69,15 @@ namespace EditorDeTexto
         {
             this.LayoutMdi(System.Windows.Forms.MdiLayout.TileVertical);
         }
-
-        private void ventanaToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
+        private void ventanaToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
             bool existeAlguno = false;
-            foreach(FEditorHijo fEditorHijo in this.MdiChildren)
+            foreach (FEditorHijo fEditorHijo in this.MdiChildren)
             {
-                if(fEditorHijo.IsHandleCreated)
-                { 
+                if (fEditorHijo.IsHandleCreated)
+                {
                     existeAlguno = true;
-                } 
+                }
             }
             if (!existeAlguno)
             {

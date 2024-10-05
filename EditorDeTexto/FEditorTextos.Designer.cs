@@ -39,6 +39,7 @@
             this.cascadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.horizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,11 +91,13 @@
             this.arrangeIconsToolStripMenuItem,
             this.cascadaToolStripMenuItem,
             this.horizontalToolStripMenuItem,
-            this.verticalToolStripMenuItem});
+            this.verticalToolStripMenuItem,
+            this.toolStripSeparator1});
+            this.ventanaToolStripMenuItem.Enabled = false;
             this.ventanaToolStripMenuItem.Name = "ventanaToolStripMenuItem";
             this.ventanaToolStripMenuItem.Size = new System.Drawing.Size(91, 29);
             this.ventanaToolStripMenuItem.Text = "Ventana";
-            this.ventanaToolStripMenuItem.DropDownOpened += new System.EventHandler(this.ventanaToolStripMenuItem_DropDownOpened);
+            this.ventanaToolStripMenuItem.DropDownOpening += new System.EventHandler(this.ventanaToolStripMenuItem_DropDownOpening);
             // 
             // arrangeIconsToolStripMenuItem
             // 
@@ -123,6 +126,11 @@
             this.verticalToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.verticalToolStripMenuItem.Text = "Vertical";
             this.verticalToolStripMenuItem.Click += new System.EventHandler(this.verticalToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(267, 6);
             // 
             // Form1
             // 
@@ -153,6 +161,7 @@
         private System.Windows.Forms.ToolStripMenuItem cascadaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem horizontalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem verticalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 
