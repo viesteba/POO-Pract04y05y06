@@ -13,6 +13,7 @@ namespace EditorDeTexto
     public partial class Form1 : Form
     {
         private int numHijos;
+        private int numHijosMuertos;
         /// <summary>
         /// Se inicializan las componentes del formulario.
         /// </summary>
@@ -20,6 +21,7 @@ namespace EditorDeTexto
         {
             InitializeComponent();
             numHijos = 0;
+            numHijosMuertos = 0;
         }
         /// <summary>
         /// Se crea un formulario un hijo.
@@ -39,7 +41,7 @@ namespace EditorDeTexto
             //Activamos la ventana y añadimos un tsmi del formulario hijo
             this.ventanaToolStripMenuItem.Enabled = true;
             ToolStripMenuItem fHijoIconsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ventanaToolStripMenuItem.DropDownItems.Insert(4+numHijos,fHijoIconsToolStripMenuItem);
+            this.ventanaToolStripMenuItem.DropDownItems.Insert(4+numHijos-numHijosMuertos,fHijoIconsToolStripMenuItem);
             fHijoIconsToolStripMenuItem.Text = numHijos + " Documento " + numHijos;
             fHijoIconsToolStripMenuItem.Checked = true;
             fHijoIconsToolStripMenuItem.Click += (s, ev) => f2.Activate();
@@ -47,6 +49,7 @@ namespace EditorDeTexto
             //Si cerramos el formulario hijo lo eliminamos de la ventana. Verficamos si quedan hijos.
             f2.FormClosed += (s, ev) => this.ventanaToolStripMenuItem.DropDownItems.Remove(fHijoIconsToolStripMenuItem);
             f2.FormClosed += ChildForm_FormClosed;
+            f2.FormClosed += (s, ev) => this.numHijosMuertos++;
 
             //Si desactivamos el formulario hijo lo desmarcamos en la ventana.
             f2.Deactivate += (s, ev) => fHijoIconsToolStripMenuItem.Checked = false;
