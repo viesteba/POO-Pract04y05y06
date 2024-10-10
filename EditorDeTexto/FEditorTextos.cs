@@ -13,7 +13,6 @@ namespace EditorDeTexto
     public partial class Form1 : Form
     {
         private int numHijos;
-        private int numHijosMuertos;
         /// <summary>
         /// Se inicializan las componentes del formulario.
         /// </summary>
@@ -21,7 +20,6 @@ namespace EditorDeTexto
         {
             InitializeComponent();
             numHijos = 0;
-            numHijosMuertos = 0;
         }
         /// <summary>
         /// Se crea un formulario un hijo.
@@ -38,24 +36,8 @@ namespace EditorDeTexto
             f2.MdiParent = this;
             f2.Show();
 
-            //Activamos la ventana y añadimos un tsmi del formulario hijo
+            ////Activamos la ventana y añadimos un tsmi del formulario hijo
             this.ventanaToolStripMenuItem.Enabled = true;
-            ToolStripMenuItem fHijoIconsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ventanaToolStripMenuItem.DropDownItems.Insert(4+numHijos-numHijosMuertos,fHijoIconsToolStripMenuItem);
-            fHijoIconsToolStripMenuItem.Text = numHijos + " Documento " + numHijos;
-            fHijoIconsToolStripMenuItem.Checked = true;
-            fHijoIconsToolStripMenuItem.Click += (s, ev) => f2.Activate();
-
-            //Si cerramos el formulario hijo lo eliminamos de la ventana. Verficamos si quedan hijos.
-            f2.FormClosed += (s, ev) => this.ventanaToolStripMenuItem.DropDownItems.Remove(fHijoIconsToolStripMenuItem);
-            f2.FormClosed += ChildForm_FormClosed;
-            f2.FormClosed += (s, ev) => this.numHijosMuertos++;
-
-            //Si desactivamos el formulario hijo lo desmarcamos en la ventana.
-            f2.Deactivate += (s, ev) => fHijoIconsToolStripMenuItem.Checked = false;
-
-            //Si activamos el formulario hijo lo marcamos en la ventana.
-            f2.Activated += (s, ev) => fHijoIconsToolStripMenuItem.Checked = true;
         }
         /// <summary>
         /// Si se cierra el formulario y no queda ningún otro formulario hijo, ventana no muestra sus opciones.
@@ -87,36 +69,37 @@ namespace EditorDeTexto
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void arrangeIconsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Form1_MdiChildActivate(object sender, EventArgs e)
         {
-            this.LayoutMdi(System.Windows.Forms.MdiLayout.ArrangeIcons);
+            if (this.ActiveMdiChild == null)
+            {
+                this.ventanaToolStripMenuItem.Visible = false;
+                this.toolStripStatusLabel2.Text = "";
+            }
+            else
+            {
+                this.ventanaToolStripMenuItem.Visible = true;
+                this.toolStripStatusLabel2.Text = this.ActiveMdiChild.Text;
+            }
         }
-        /// <summary>
-        /// Al seleccionar 'Cascada' en ventana ofrece una presentación en estilo cascada.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void cascadaToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void ventanaToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            this.LayoutMdi(System.Windows.Forms.MdiLayout.Cascade);
-        }
-        /// <summary>
-        /// Al seleccionar 'Horizontal' en ventana ofrece una disposición horizontal de los formularios.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void horizontalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.LayoutMdi(System.Windows.Forms.MdiLayout.TileHorizontal);
-        }
-        /// <summary>
-        /// Al seleccionar 'Vertical' en ventana muestra una disposición vertical de los formularios hijos.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void verticalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.LayoutMdi(System.Windows.Forms.MdiLayout.TileVertical);
+            ToolStripItem auxiliar = e.ClickedItem;
+
+            if (auxiliar.Equals(this.arrangeIconsToolStripMenuItem))
+            {
+                this.LayoutMdi(System.Windows.Forms.MdiLayout.ArrangeIcons);
+            }else if (auxiliar.Equals(this.cascadaToolStripMenuItem))
+            {
+                this.LayoutMdi(System.Windows.Forms.MdiLayout.Cascade);
+            }else if (auxiliar.Equals(this.horizontalToolStripMenuItem))
+            {
+                this.LayoutMdi(System.Windows.Forms.MdiLayout.TileHorizontal);
+            }else if (auxiliar.Equals(this.verticalToolStripMenuItem))
+            {
+                this.LayoutMdi(System.Windows.Forms.MdiLayout.TileVertical);
+            }
         }
     }
 }
