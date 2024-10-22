@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -165,6 +166,8 @@ namespace EditorDeTexto
                 fhijo.MdiParent = this;
                 numHijos++;
                 fhijo.rellenarRichTextBox(file.FileName,RichTextBoxStreamType.PlainText);
+                fhijo.Show();
+                fhijo.Text = Path.GetFileName(file.FileName);
             }
         }
     }
