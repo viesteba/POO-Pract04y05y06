@@ -42,22 +42,7 @@ namespace EditorDeTexto
             this.ventanaToolStripMenuItem.Enabled = true;
             this.cargarEventosEnStatusBar();
         }
-        /// <summary>
-        /// Si se cierra el formulario y no queda ningún otro formulario hijo, ventana no muestra sus opciones.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ChildForm_FormClosed(object sender, EventArgs e)
-        {
-            if (this.MdiChildren.Length > 1)
-            {
-                this.ventanaToolStripMenuItem.Enabled = true;
-            }
-            else
-            {
-                this.ventanaToolStripMenuItem.Enabled = false;
-            }
-        }
+        
         /// <summary>
         /// Cierra el formulario cuando se pulsa el botón Salir en Archivo.
         /// </summary>
@@ -164,6 +149,23 @@ namespace EditorDeTexto
         private void menuStrip1_MouseLeave(object sender, EventArgs e)
         {
             this.toolStripStatusLabel1.Text = "";
+        }
+
+        private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog file = new OpenFileDialog();
+            file.Title = "Seleccione el archivo a abrir";
+            file.Filter = "Archivos de texto|*.txt|Todos los archivos|*.*";
+
+            // Para seleccionar el archivo a abrir.
+            DialogResult resultado = file.ShowDialog();
+            if (resultado == DialogResult.OK) {
+                FEditorHijo fhijo = new FEditorHijo(numHijos);
+                TextBox tb = new TextBox();
+                fhijo.MdiParent = this;
+                numHijos++;
+                fhijo.rellenarRichTextBox(file.FileName,RichTextBoxStreamType.PlainText);
+            }
         }
     }
 }

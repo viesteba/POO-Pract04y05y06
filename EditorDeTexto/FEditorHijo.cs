@@ -46,5 +46,9 @@ namespace EditorDeTexto
         {
             Application.Exit();
         }
+        public void rellenarRichTextBox(string name, RichTextBoxStreamType rtbst)
+        {
+            this.richTextBox1.LoadFile(name, rtbst);
+        }
     }
 }
