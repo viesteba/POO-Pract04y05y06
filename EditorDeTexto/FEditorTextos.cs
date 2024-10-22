@@ -35,8 +35,9 @@ namespace EditorDeTexto
         {
             // Creamos y mostramos el nuevo formulario hijo
             numHijos++;
-            FEditorHijo f2 = new FEditorHijo(numHijos);
+            FEditorHijo f2 = new FEditorHijo();
             f2.MdiParent = this;
+            f2.Text = "Documento " + numHijos;
             f2.Show();
 
             ////Activamos la ventana y añadimos un tsmi del formulario hijo
@@ -161,11 +162,9 @@ namespace EditorDeTexto
             // Para seleccionar el archivo a abrir.
             DialogResult resultado = file.ShowDialog();
             if (resultado == DialogResult.OK) {
-                FEditorHijo fhijo = new FEditorHijo(numHijos);
-                TextBox tb = new TextBox();
+                FEditorHijo fhijo = new FEditorHijo(file.FileName);
                 fhijo.MdiParent = this;
                 numHijos++;
-                fhijo.rellenarRichTextBox(file.FileName,RichTextBoxStreamType.PlainText);
                 fhijo.Show();
                 fhijo.Text = Path.GetFileName(file.FileName);
             }
