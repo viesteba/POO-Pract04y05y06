@@ -82,7 +82,11 @@ namespace EditorDeTexto
                 this.toolStripStatusLabel2.Text = this.ActiveMdiChild.Text;
             }
         }
-
+        /// <summary>
+        /// Determina el estilo de las ventanas de los formularios hijos.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ventanaToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             ToolStripItem auxiliar = e.ClickedItem;
@@ -99,6 +103,24 @@ namespace EditorDeTexto
             }else if (auxiliar.Equals(this.verticalToolStripMenuItem))
             {
                 this.LayoutMdi(System.Windows.Forms.MdiLayout.TileVertical);
+            }
+        }
+        /// <summary>
+        /// Cuando se hace clic sobre la barra de estado, si no está se muestra y si está desaparece.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void barraDeEstadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.barraDeEstadoToolStripMenuItem.Checked)
+            {
+                this.barraDeEstadoToolStripMenuItem.Checked = false;
+                this.statusStrip1.Visible = false;
+            }
+            else
+            {
+                this.barraDeEstadoToolStripMenuItem.Checked = true;
+                this.statusStrip1.Visible = true;
             }
         }
     }
