@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -38,6 +39,7 @@ namespace EditorDeTexto
 
             ////Activamos la ventana y añadimos un tsmi del formulario hijo
             this.ventanaToolStripMenuItem.Enabled = true;
+            this.cargarEventosEnStatusBar();
         }
         /// <summary>
         /// Si se cierra el formulario y no queda ningún otro formulario hijo, ventana no muestra sus opciones.
@@ -122,6 +124,45 @@ namespace EditorDeTexto
                 this.barraDeEstadoToolStripMenuItem.Checked = true;
                 this.statusStrip1.Visible = true;
             }
+        }
+        /// <summary>
+        /// Carga los eventos del mouse sobre el menuStrip
+        /// </summary>
+        private void cargarEventosEnStatusBar()
+        {
+            foreach(ToolStripMenuItem item in this.menuStrip1.Items)
+            {
+                item.MouseEnter += new EventHandler(menuStrip1_MouseEnter);
+                item.MouseLeave += new EventHandler(menuStrip1_MouseLeave);
+                
+                foreach(ToolStripItem dropDownItem in item.DropDownItems)
+                {
+                    dropDownItem.MouseEnter += new EventHandler(menuStrip1_MouseEnter);
+                    dropDownItem.MouseLeave += new EventHandler(menuStrip1_MouseLeave);
+                }
+            }
+        }
+        /// <summary>
+        /// Le da el nombre si tiene a la barra de estado.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuStrip1_MouseEnter(object sender, EventArgs e)
+        {
+            ToolStripMenuItem aux = sender as ToolStripMenuItem;
+            if(aux != null)
+            {
+                this.toolStripStatusLabel1.Text = aux.Text;
+            }
+        }
+        /// <summary>
+        /// Elimina el nombre que tiene la barra de estado.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuStrip1_MouseLeave(object sender, EventArgs e)
+        {
+            this.toolStripStatusLabel1.Text = "";
         }
     }
 }
