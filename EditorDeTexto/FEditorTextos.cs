@@ -21,6 +21,7 @@ namespace EditorDeTexto
         {
             InitializeComponent();
             numHijos = 0;
+            this.cargarEventosEnStatusBar();
         }
         /// <summary>
         /// Se crea un formulario un hijo.
