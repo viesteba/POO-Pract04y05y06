@@ -40,6 +40,7 @@
             this.cortarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pegarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -117,6 +118,7 @@
             // 
             this.ediciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deshacerToolStripMenuItem,
+            this.toolStripSeparator1,
             this.cortarToolStripMenuItem,
             this.copiarToolStripMenuItem,
             this.pegarToolStripMenuItem});
@@ -147,6 +149,11 @@
             this.pegarToolStripMenuItem.Name = "pegarToolStripMenuItem";
             this.pegarToolStripMenuItem.Size = new System.Drawing.Size(186, 34);
             this.pegarToolStripMenuItem.Text = "Pegar";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(267, 6);
             // 
             // FEditorHijo
             // 
@@ -183,5 +190,6 @@
         private System.Windows.Forms.ToolStripMenuItem cortarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copiarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pegarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
