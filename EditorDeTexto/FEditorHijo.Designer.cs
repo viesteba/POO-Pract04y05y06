@@ -95,7 +95,7 @@
             this.guardarToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.guardarToolStripMenuItem.MergeIndex = 2;
             this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(228, 34);
             this.guardarToolStripMenuItem.Text = "Guardar";
             this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
             // 
@@ -104,7 +104,7 @@
             this.guardarComoToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.guardarComoToolStripMenuItem.MergeIndex = 3;
             this.guardarComoToolStripMenuItem.Name = "guardarComoToolStripMenuItem";
-            this.guardarComoToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.guardarComoToolStripMenuItem.Size = new System.Drawing.Size(228, 34);
             this.guardarComoToolStripMenuItem.Text = "Guardar como";
             this.guardarComoToolStripMenuItem.Click += new System.EventHandler(this.guardarComoToolStripMenuItem_Click);
             // 
@@ -113,7 +113,7 @@
             this.cerrarToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.cerrarToolStripMenuItem.MergeIndex = 5;
             this.cerrarToolStripMenuItem.Name = "cerrarToolStripMenuItem";
-            this.cerrarToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.cerrarToolStripMenuItem.Size = new System.Drawing.Size(228, 34);
             this.cerrarToolStripMenuItem.Text = "Cerrar";
             // 
             // ediciónToolStripMenuItem
@@ -170,6 +170,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FEditorHijo";
             this.Text = "Documento";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FEditorHijo_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FEditorHijo_FormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

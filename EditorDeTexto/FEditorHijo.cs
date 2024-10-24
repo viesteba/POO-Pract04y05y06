@@ -107,5 +107,20 @@ namespace EditorDeTexto
                 }
             }
         }
+
+        private void FEditorHijo_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (this.richTextBox1.Modified)
+            {
+                DialogResult respuesta = MessageBox.Show("¿Quieres cerrar sin guardar?", "Aviso", MessageBoxButtons.YesNoCancel);
+                if (respuesta == DialogResult.No)
+                {
+                    this.guardarToolStripMenuItem.PerformClick();
+                }
+                else if (respuesta == DialogResult.Cancel) {
+                    e.Cancel = true;
+                }
+            }
+        }
     }
 }
