@@ -35,16 +35,14 @@ namespace EditorDeTexto
             this.Text = Path.GetFileName(direcc);
             this.Name = "form" + this.Text;
 
-            RichTextBox rtb = new RichTextBox();
             if(Path.GetExtension(direcc) == ".txt")
             {
-                rtb.LoadFile(direcc,RichTextBoxStreamType.PlainText);
+                this.richTextBox1.LoadFile(direcc,RichTextBoxStreamType.PlainText);
             }
             else if(Path.GetExtension(direcc) == ".rtf")
             {
-                rtb.LoadFile(direcc,RichTextBoxStreamType.RichText);
+                this.richTextBox1.LoadFile(direcc,RichTextBoxStreamType.RichText);
             }
-            this.richTextBox1.Text = rtb.Text;
         }
         /// <summary>
         /// Avisa del cierre del formulario.
