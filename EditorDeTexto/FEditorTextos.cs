@@ -22,7 +22,6 @@ namespace EditorDeTexto
         {
             InitializeComponent();
             numHijos = 0;
-            this.cargarEventosEnStatusBar();
         }
         /// <summary>
         /// Se crea un formulario un hijo.
@@ -42,7 +41,6 @@ namespace EditorDeTexto
 
             ////Activamos la ventana y añadimos un tsmi del formulario hijo
             this.ventanaToolStripMenuItem.Enabled = true;
-            this.cargarEventosEnStatusBar();
         }
         
         /// <summary>
@@ -125,11 +123,35 @@ namespace EditorDeTexto
                 
                 foreach(ToolStripItem dropDownItem in item.DropDownItems)
                 {
-                    dropDownItem.MouseEnter += new EventHandler(menuStrip1_MouseEnter);
-                    dropDownItem.MouseLeave += new EventHandler(menuStrip1_MouseLeave);
+                    if(dropDownItem is ToolStripMenuItem)
+                    {
+                        dropDownItem.MouseEnter += new EventHandler(menuStrip1_MouseEnter);
+                        dropDownItem.MouseLeave += new EventHandler(menuStrip1_MouseLeave);
+                    }
                 }
             }
         }
+        /// <summary>
+        /// Descargar los eventos del mouse sobre el menuStrip.
+        /// </summary>
+        private void descargarEventosEnStatusBar()
+        {
+            foreach (ToolStripMenuItem item in this.menuStrip1.Items)
+            {
+                item.MouseEnter -= new EventHandler(menuStrip1_MouseEnter);
+                item.MouseLeave -= new EventHandler(menuStrip1_MouseLeave);
+
+                foreach (ToolStripItem dropDownItem in item.DropDownItems)
+                {
+                    if(dropDownItem is ToolStripMenuItem)
+                    {
+                        dropDownItem.MouseEnter -= new EventHandler(menuStrip1_MouseEnter);
+                        dropDownItem.MouseLeave -= new EventHandler(menuStrip1_MouseLeave);
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Le da el nombre si tiene a la barra de estado.
         /// </summary>
@@ -152,7 +174,11 @@ namespace EditorDeTexto
         {
             this.toolStripStatusLabel1.Text = "";
         }
-
+        /// <summary>
+        /// Abre el archivo que se seleccione en el formulario hijo activo.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog file = new OpenFileDialog();
@@ -168,6 +194,16 @@ namespace EditorDeTexto
                 fhijo.Show();
                 fhijo.Text = Path.GetFileName(file.FileName);
             }
+        }
+        /// <summary>
+        /// Completa el diseño descargando los eventos del mouse y cargando los nuevos.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void statusStrip1_LayoutCompleted(object sender, EventArgs e)
+        {
+            this.descargarEventosEnStatusBar();
+            this.cargarEventosEnStatusBar();
         }
     }
 }
