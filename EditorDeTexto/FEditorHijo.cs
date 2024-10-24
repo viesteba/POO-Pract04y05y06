@@ -64,7 +64,12 @@ namespace EditorDeTexto
         {
             Application.Exit();
         }
-
+        /// <summary>
+        /// Si no tiene dirección, lo guarda desde cero. 
+        /// Si tiene dirección, lo guarda con su correspondiente extensión (txt o rtf).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(this.direccion == "")
@@ -84,7 +89,11 @@ namespace EditorDeTexto
                 }
             }
         }
-
+        /// <summary>
+        /// Determina el título y lo guarda con la extensión correspondiente (txt o rtf).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void guardarComoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog save = new SaveFileDialog();
@@ -107,7 +116,12 @@ namespace EditorDeTexto
                 }
             }
         }
-
+        /// <summary>
+        /// Pregunta al usuario si quiere cerrar en caso de que no esté guardado. 
+        /// Si quiere se cierra, si no quiere se guarda y si cancela vuelve al estado antes de hacer clic en cerrar. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FEditorHijo_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (this.richTextBox1.Modified)
@@ -121,6 +135,42 @@ namespace EditorDeTexto
                     e.Cancel = true;
                 }
             }
+        }
+        /// <summary>
+        /// Deshace los cambios no almacenados en el documento.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void deshacerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.richTextBox1.Undo();
+        }
+        /// <summary>
+        /// Corta el texto seleccionado en el documento.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cortarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.richTextBox1.Cut();
+        }
+        /// <summary>
+        /// Copia el texto seleccionado en el documento.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void copiarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.richTextBox1.Copy();
+        }
+        /// <summary>
+        /// Pega el contenido del portapales en el docuemnto.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pegarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.richTextBox1.Paste();
         }
     }
 }
