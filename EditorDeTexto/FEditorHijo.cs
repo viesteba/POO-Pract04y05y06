@@ -172,5 +172,21 @@ namespace EditorDeTexto
         {
             this.richTextBox1.Paste();
         }
+        /// <summary>
+        /// Determina los valores de la fuente y el color del documento.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void fuenteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FontDialog fuente = new FontDialog();
+            fuente.ShowColor = true;
+
+            if(fuente.ShowDialog() == DialogResult.OK)
+            {
+                this.richTextBox1.Font = fuente.Font;
+                this.richTextBox1.ForeColor = fuente.Color;
+            };
+        }
     }
 }
