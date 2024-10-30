@@ -205,5 +205,23 @@ namespace EditorDeTexto
             this.descargarEventosEnStatusBar();
             this.cargarEventosEnStatusBar();
         }
+
+        private void nuevo_Click(object sender, EventArgs e)
+        {
+            this.nuevoToolStripMenuItem1_Click(sender, e);
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            this.abrirToolStripMenuItem_Click((object) sender, e);
+        }
+
+        private void cerrarTodoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach(FEditorHijo fhijo in this.MdiChildren)
+            {
+                fhijo.Close();
+            }
+        }
     }
 }

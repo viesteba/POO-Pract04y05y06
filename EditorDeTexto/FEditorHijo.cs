@@ -186,5 +186,10 @@ namespace EditorDeTexto
                 this.richTextBox1.ForeColor = fuente.Color;
             };
         }
+
+        private void guardar_Click(object sender, EventArgs e)
+        {
+            this.guardarToolStripMenuItem_Click(sender, e);
+        }
     }
 }
