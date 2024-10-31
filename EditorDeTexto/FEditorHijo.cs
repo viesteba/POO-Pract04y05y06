@@ -196,5 +196,10 @@ namespace EditorDeTexto
         {
             this.guardarComoToolStripMenuItem_Click(sender, e );
         }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
