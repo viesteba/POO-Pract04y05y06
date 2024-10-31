@@ -223,5 +223,15 @@ namespace EditorDeTexto
                 fhijo.Close();
             }
         }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            this.cerrarTodoToolStripMenuItem_Click((Object) sender, e);
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            this.salirToolStripMenuItem_Click(sender, e);
+        }
     }
 }
